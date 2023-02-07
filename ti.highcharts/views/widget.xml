@@ -1,6 +1,6 @@
 <Alloy>
-	<View id="chartView">
-		<WebView id='chartWebView'></WebView>
+	<View id="chartView" height="Ti.UI.SIZE">
+		<WebView id='chartWebView' disableBounce="true" enableZoomControls="false" disableContextMenu="true" willHandleTouches="false" backgroundColor="transparent"></WebView>
 	</View>
 	<View id="chartAsImage" height="0" visible="false"></View>
 </Alloy>

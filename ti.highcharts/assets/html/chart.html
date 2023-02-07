@@ -4,22 +4,44 @@
 <head>
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<script src="highcharts.jsf"></script>
-	<!-- You can comment out the two scripts below if you don't need them -->
-	<script src="jquery.min.jsf"></script>
-	<script src="exporting.jsf"></script>
-	<script type="text/javascript">
-		function plotChart(data, pic) {
-			if (pic) {
-				new Highcharts.Chart(data, Ti.App.fireEvent('fromWebView'));
-			} else {
-				new Highcharts.Chart(data);
-			}
-		};
-	</script>
 </head>
 
 <body>
+	<script src="highstock.js"></script>
+	<script src="jquery.min.jsf"></script>
+	<script type="text/javascript">
+		var chart;
+		function plotChart(data) {
+			if (pic) {
+				chart = new Highcharts.Chart(data, Ti.App.fireEvent('fromWebView'));
+			} else {
+				chart = new Highcharts.Chart(data);
+			}
+		};
+
+		function stockChart(data) {
+			Highcharts.setOptions({
+				lang: {
+					decimalPoint: ",",
+					thousandsSep: ".",
+					months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+					shortMonths: ["Jan", "Fev", "Mar", "Abr", "Maio", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+					weekdays: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
+				}
+			});
+
+			chart = new Highcharts.StockChart(data);
+		};
+
+		function resetChart() {
+			chart.destroy();
+		};
+
+		function updateChart(data) {
+			chart.update(data);
+			chart.xAxis[0].setExtremes();
+		}
+	</script>
 	<div id="container"></div>
 </body>
 
